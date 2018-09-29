@@ -5,37 +5,43 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "TurnRight.h"
+#include <Commands/Turn.h>
 
-TurnRight::TurnRight(double anglepoint) {
+Turn::Turn(double anglePoint, double turnVal) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	setpoint = anglepoint;
 	Requires(CommandBase::turn);
+	setpoint = anglePoint;
+	thisTurnVal = turnVal;
 }
 
 // Called just before this Command runs the first time
-void TurnRight::Initialize() {
+void Turn::Initialize() {
 	CommandBase::turn->resetEncoders();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void TurnRight::Execute() {
-	CommandBase::turn->tankDrive(0.25, 0.5);
+void Turn::Execute() {
+	if (thisTurnVal < 0) {
+		CommandBase::turn->tankDrive(0.25, 0.5);
+	}
+	if (thisTurnVal > 0) {
+		CommandBase::turn->tankDrive(0.5, 0.25);
+	}
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool TurnRight::IsFinished() {
-	return (CommandBase::turn > setpoint);
+bool TurnLeft::IsFinished() {
+	return (CommandBase::turn->getAngle() > setpoint);
 }
 
 // Called once after isFinished returns true
-void TurnRight::End() {
-
+void TurnLeft::End() {
+	CommandBase::turn->tankDrive(0.0,0.0);
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void TurnRight::Interrupted() {
+void TurnLeft::Interrupted() {
 
 }

@@ -9,10 +9,12 @@
 
 #include <Commands/Command.h>
 #include "../CommandBase.h"
-class TurnRight : public frc::Command {
+
+class Turn : public frc::Command {
 public:
-	TurnRight(double anglePoint);
+	Turn(double anglePoint);
 	double setpoint;
+	double thisTurnVal;
 	void Initialize() override;
 	void Execute() override;
 	bool IsFinished() override;
