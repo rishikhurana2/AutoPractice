@@ -12,28 +12,28 @@
 #include "ctre/Phoenix.h"
 #include "math.h"
 
-class DriveTrain : public frc::Subsystem {
+class Turn : public frc::Subsystem {
 private:
+	// It's desirable that everything possible under private except
+	// for methods that implement subsystem capabilities
 	// It's desirable that everything possible under private except
 	// for methods that implement subsystem capabilities
 	TalonSRX* left;
 	TalonSRX* right;
-	//ADXRS450_Gyro* gyro;
+	ADXRS450_Gyro* gyro;
 	double circumference = 6 * M_PI; //diameter = 6 inches
 public:
-	DriveTrain();
+	Turn();
 	void InitDefaultCommand();
 	void tankDrive(double leftVal, double rightVal);
 	void turn(double leftVal, double rightVal);
 	//void arcadeDrive(double moveVal, double rotateVal);
 	double Limit(double num, double max);
-	//double getAngle();
 	//double getSpeed();
-	//void gyroReset();
+	double getAngle();
+	void gyroReset();
 	double leftDistance(); //inches
 	double rightDistance(); //inches
 	void resetEncoders();
-	//void gyroCalibrate();
-
-};
+	void gyroCalibrate();};
 

@@ -17,6 +17,7 @@
 //#include "Subsystems/Catcher.h"
 //#include "OI.h"
 #include "Subsystems/DriveTrain.h"
+#include "Subsystems/Turn.h"
 //#include "Subsystems/Arm.h"
 //#include "Subsystems/Camera.h"
 //#include "Subsystems/Lift.h"
@@ -36,7 +37,7 @@ public:
 
 	// Create a single static instance of all of your subsystems
 	static DriveTrain* drive;
-
+	static Turn* turn;
 };
 
 

@@ -5,37 +5,37 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-#include "DriveForward.h"
+#include <Commands/TurnLeft.h>
 
-DriveForward::DriveForward(double distance) {
+TurnLeft::TurnLeft(double anglePoint) {
 	// Use Requires() here to declare subsystem dependencies
 	// eg. Requires(Robot::chassis.get());
-	setpoint = distance;
-	Requires(CommandBase::drive);
+	Requires(CommandBase::turn);
+	setpoint = anglePoint;
 }
 
 // Called just before this Command runs the first time
-void DriveForward::Initialize() {
-	CommandBase::drive->resetEncoders();
+void TurnLeft::Initialize() {
+	CommandBase::turn->resetEncoders();
 }
 
 // Called repeatedly when this Command is scheduled to run
-void DriveForward::Execute() {
-	CommandBase::drive->tankDrive(0.5,0.5);
+void TurnLeft::Execute() {
+	CommandBase::turn->tankDrive(0.5, 0.25);
 }
 
 // Make this return true when this Command no longer needs to run execute()
-bool DriveForward::IsFinished() {
-	return (CommandBase::drive->leftDistance() + CommandBase::drive->rightDistance())/2 > setpoint;
+bool TurnLeft::IsFinished() {
+	return (CommandBase::turn->getAngle() > setpoint);
 }
 
 // Called once after isFinished returns true
-void DriveForward::End() {
-	CommandBase::drive->tankDrive(0,0);
+void TurnLeft::End() {
+
 }
 
 // Called when another command which requires one or more of the same
 // subsystems is scheduled to run
-void DriveForward::Interrupted() {
+void TurnLeft::Interrupted() {
 
 }

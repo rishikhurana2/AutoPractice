@@ -17,6 +17,7 @@
 
 
 DriveTrain* CommandBase::drive = nullptr;
+Turn* CommandBase::turn = nullptr;
 
 CommandBase::CommandBase(const std::string &name) : frc::Command(name) {
 
@@ -28,7 +29,8 @@ void CommandBase::initialize()
 {
 
 	drive = new DriveTrain();
-	std::cout << "drivetrain constructor completed" << std::
+	turn = new Turn();
+	std::cout << "drivetrain constructor completed" << std::endl;
 	//catcher = new Catcher();
 	//std::cout << "catcher constructor completed" << std::endl;
 	//lift = new Lift();
